@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Calculadora vue.js</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <form>
+            <div>
+                <label for="numero1">Primerio numero</label>
+                <input type="text" name="numero" id="numero1" v-model.number="numero1">
+            </div>
+
+            <select v-model="operacao">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="/">/</option>
+                    <option value="*">*</option>
+            </select>
+
+            <div>
+                <label for="numero2">segundo numero</label>
+                <input type="text" name="numero2" id="numero2" v-model.number="numero2">
+            </div>
+
+            <div>
+                <button v-on:click.prevent="calcular">calcular</button>
+
+            </div>
+
+            <div>
+                 <label for="resultado">Resultado</label>
+                 <input type="text" name="resultado" id="resultado" v-model="resultado" />
+            </div>
+
+        </form>
+
+        <ul>
+            <li v-for="registro in historico">{{ registro }}</li>
+        </ul>
+
+    </div>
+
+    <script>
+
+
+
+
+
+        var app = new Vue({
+            el: '#app',
+
+            data: {
+                numero1: null,
+                numero2: null,
+                operacao: null,
+                resultado: null,
+                historico: []
+
+
+            },
+
+            methods: {
+                calcular: function() {
+                    console.log(this.operacao)
+                    switch(this.operacao){
+
+                        case '+':
+                        this.resultado = this.numero1 + this.numero2;
+                        break;
+
+                        case '-':
+                        this.resultado = this.numero1 - this.numero2;
+                        break;
+
+                        case '/':
+                        this.resultado = this.numero1 / this.numero2;
+                        break;
+
+                        case '*':
+                        this.resultado = this.numero1 * this.numero2;
+                        break;
+
+                        
+
+                        default: 
+                        break;
+                    }
+
+                    
+
+                        var registroHistorico = this.numero1 + ' ' + 
+                    this.operacao + ' ' + 
+                    this.numero2 + ' = ' +
+                    this.resultado;
+
+                    
+                        this.historico.push(registroHistorico);
+                    
+
+                    
+
+                    
+
+
+                }
+                
+            }
+
+        });
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
